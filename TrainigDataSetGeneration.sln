@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainigDataSetGeneration", "TrainigDataSetGeneration\TrainigDataSetGeneration.csproj", "{4795828D-92A9-4A5D-BCE5-9A9D2D9CB2A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMLWebServiceRequests", "AMLWebServiceRequests\AMLWebServiceRequests.csproj", "{98A0B31C-DA07-4DDB-8A32-9BAD06DA33C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4795828D-92A9-4A5D-BCE5-9A9D2D9CB2A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4795828D-92A9-4A5D-BCE5-9A9D2D9CB2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4795828D-92A9-4A5D-BCE5-9A9D2D9CB2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4795828D-92A9-4A5D-BCE5-9A9D2D9CB2A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98A0B31C-DA07-4DDB-8A32-9BAD06DA33C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98A0B31C-DA07-4DDB-8A32-9BAD06DA33C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98A0B31C-DA07-4DDB-8A32-9BAD06DA33C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98A0B31C-DA07-4DDB-8A32-9BAD06DA33C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EFD045FC-C46E-48AE-851B-222222CFBFB2}
+	EndGlobalSection
+EndGlobal
