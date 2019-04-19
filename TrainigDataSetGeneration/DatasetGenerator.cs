@@ -112,7 +112,7 @@ namespace TrainigDataSetGeneration
             bool withBankAccount = false)
         {
             Random rnd = new Random();
-            IEnumerable<UserAccount> userAccounts = Enumerable.Range(2, usersCount + 2)
+            IEnumerable<UserAccount> userAccounts = Enumerable.Range(2, usersCount)
                 .Select(i =>
                 {
                     var userId = Guid.NewGuid();
@@ -122,7 +122,7 @@ namespace TrainigDataSetGeneration
                     var baseStartRangeValueNormal = i * 14;
                     var baseEndRangeValueNormal = i * 24;
 
-                    var items = new List<UserAccount.OperationReceiverInfo>();
+                    var moneyReceivers = new List<UserAccount.OperationReceiverInfo>();
                     for (int f = 0; f < friendsNumber; f++)
                     {
                         double friendNumberMultiplier = 1 + f * 0.1;
@@ -133,7 +133,7 @@ namespace TrainigDataSetGeneration
                                 (int)(baseEndRangeValueFraud * ByPhoneMultiplier * friendNumberMultiplier));
                             var normalRange = new AmountRange((int)(baseStartRangeValueNormal * ByPhoneMultiplier * friendNumberMultiplier),
                                 (int)(baseEndRangeValueNormal * ByPhoneMultiplier * friendNumberMultiplier));
-                            items.Add(new UserAccount.OperationReceiverInfo(GeneratePhoneNumber(rnd),
+                            moneyReceivers.Add(new UserAccount.OperationReceiverInfo(GeneratePhoneNumber(rnd),
                                 OperationType.ByPhone, fraudRange, normalRange));
                         }
 
@@ -143,7 +143,7 @@ namespace TrainigDataSetGeneration
                                 (int)(baseEndRangeValueFraud * ByCardNumberMultiplier * friendNumberMultiplier));
                             var normalRange = new AmountRange((int)(baseStartRangeValueNormal * ByCardNumberMultiplier * friendNumberMultiplier),
                                 (int)(baseEndRangeValueNormal * ByCardNumberMultiplier * friendNumberMultiplier));
-                            items.Add(new UserAccount.OperationReceiverInfo(this.GenerateCardNumber(rnd),
+                            moneyReceivers.Add(new UserAccount.OperationReceiverInfo(this.GenerateCardNumber(rnd),
                                 OperationType.ByCreditCard,
                                 fraudRange, normalRange));
                         }
@@ -154,24 +154,24 @@ namespace TrainigDataSetGeneration
                                 (int)(baseEndRangeValueFraud * ByBankAccountMultiplier * friendNumberMultiplier));
                             var normalRange = new AmountRange((int)(baseStartRangeValueNormal * ByBankAccountMultiplier * friendNumberMultiplier),
                                 (int)(baseEndRangeValueNormal * ByBankAccountMultiplier * friendNumberMultiplier));
-                            items.Add(new UserAccount.OperationReceiverInfo(Guid.NewGuid().ToString("D"),
+                            moneyReceivers.Add(new UserAccount.OperationReceiverInfo(this.GenerateNumber(20, rnd),
                                 OperationType.ToOuterAccount,
                                 fraudRange, normalRange));
                         }
 
                         if (withEwallet)
                         {
-                            var fraudRange = new AmountRange(baseStartRangeValueFraud * ByEWalletMultiplier,
-                                baseEndRangeValueFraud * ByEWalletMultiplier);
-                            var normalRange = new AmountRange(baseStartRangeValueNormal * ByEWalletMultiplier,
-                                baseEndRangeValueNormal * ByEWalletMultiplier);
-                            items.Add(new UserAccount.OperationReceiverInfo(GeneratePhoneNumber(rnd),
+                            var fraudRange = new AmountRange((int)(baseStartRangeValueFraud * ByEWalletMultiplier * friendNumberMultiplier),
+                                (int)(baseEndRangeValueFraud * ByEWalletMultiplier * friendNumberMultiplier));
+                            var normalRange = new AmountRange((int)(baseStartRangeValueNormal * ByEWalletMultiplier * friendNumberMultiplier),
+                                (int)(baseEndRangeValueNormal * ByEWalletMultiplier * friendNumberMultiplier));
+                            moneyReceivers.Add(new UserAccount.OperationReceiverInfo(this.GenerateNumber(22, rnd),
                                 OperationType.ToEWallet,
                                 fraudRange, normalRange));
                         }
                     }
 
-                    return new UserAccount(userId, deviceId, items);
+                    return new UserAccount(userId, deviceId, moneyReceivers);
                 })
                 .ToList();
 
@@ -202,6 +202,17 @@ namespace TrainigDataSetGeneration
                 rnd.Next(0000000, 9999999).ToString(),
             };
             return string.Join(string.Empty, parts);
+        }
+
+        private string GenerateNumber(int length, Random rnd)
+        {
+            StringBuilder sb = new StringBuilder();
+            while (sb.Length < length)
+            {
+                sb.Append(rnd.Next(0, 9));
+            }
+
+            return sb.ToString();
         }
 
         private string GenerateCardNumber(Random rnd)

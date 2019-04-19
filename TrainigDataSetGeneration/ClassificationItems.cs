@@ -33,6 +33,12 @@ namespace TrainigDataSetGeneration
     {
         public string PhoneNumber { get; set; }
 
+        public string CardNumber { get; set; }
+
+        public string Ewallet { get; set; }
+
+        public string BankAccount { get; set; }
+
         public OperationItem(string userId, string deviceId, int amount, int isFraud) 
             : base (userId, deviceId, amount, isFraud)
         {

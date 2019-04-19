@@ -11,7 +11,7 @@ namespace TrainigDataSetGeneration
         static void Main(string[] args)
         {
             var dataSetgenerator = new DatasetGenerator();
-            dataSetgenerator.GenerateComplexDataset(5, 500, 5, withPhone: true);
+            dataSetgenerator.GenerateComplexDataset(3, 500, 5, withPhone: true, withCard:true, withBankAccount:true, withEwallet:true);
         }
     }
 }

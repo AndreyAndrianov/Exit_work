@@ -31,7 +31,10 @@ namespace TrainigDataSetGeneration
                         o.Amount,
                         Convert.ToInt32(o.IsFraud))
                     {
-                        PhoneNumber = !string.IsNullOrWhiteSpace(o.ReceiverId) ? o.ReceiverId : string.Empty,
+                        PhoneNumber = o.OperationType == OperationType.ByPhone ? o.ReceiverId : string.Empty,
+                        CardNumber = o.OperationType == OperationType.ByCreditCard ? o.ReceiverId : string.Empty,
+                        BankAccount = o.OperationType == OperationType.ToOuterAccount ? o.ReceiverId : string.Empty,
+                        Ewallet = o.OperationType == OperationType.ToEWallet ? o.ReceiverId : string.Empty,
                     })
                 .ToList();
         }
